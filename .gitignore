@@ -51,6 +51,7 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
+build/
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
@@ -95,3 +96,26 @@ _deps
 *.out
 *.app
 
+common/inc/common/BaseConfig.h
+common/inc/common/BenchMarkModules.h
+
+ext/**
+# Swap
+[._]*.s[a-v][a-z]
+!*.svg  # comment out if you don't need vector files
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+Sessionx.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~

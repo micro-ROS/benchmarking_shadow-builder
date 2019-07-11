@@ -1,0 +1,2 @@
+#/bin/bash
+PATH_SOURCE=${CMAKE_SOURCE_DIR}

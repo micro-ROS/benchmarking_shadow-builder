@@ -1,0 +1,28 @@
+[submodule "llvm"]
+	path = ext/dl/llvm
+	url = https://github.com/llvm-mirror/llvm.git
+	branch = aadc688c8ea8a869f7ef4c260208c9d532d26dc3
+[submodule "clang"]
+	path = ext/dl/clang
+	url = https://github.com/llvm-mirror/clang.git 
+	branch = f1a4d8270deb2472ac5245a53a85c7c35155ea29
+[submodule "cxxopts"]
+	path = ext/dl/cxxopts
+	url = https://github.com/jarro2783/cxxopts.git
+	branch = 3c73d91c0b04e2b59462f0a741be8c07024c1bc0
+[submodule "tinyxml2"]
+	path = ext/dl/tinyxml2
+	url = https://github.com/leethomason/tinyxml2.git
+	branch = 61a4c7d507322c9f494f5880d4c94b60e4ce9590
+[submodule "libgit2"]
+	path = ext/dl/libgit2
+	url = https://github.com/libgit2/libgit2.git
+	branch = 3828d7afdd08b595584048e8e4dab6ddd4506ed1
+[submodule "z3"]
+	path = ext/dl/z3
+	url =  https://github.com/Z3Prover/z3.git
+	branch = fd1974845b01fbc4c66fd584e062d3888b23dec9
+[submodule "ninja"]
+	path = ext/dl/ninja
+	url = git://github.com/ninja-build/ninja.git
+	branch = master
