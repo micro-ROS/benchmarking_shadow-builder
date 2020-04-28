@@ -1,5 +1,5 @@
-Shadow Builder
-==============
+Shadow Builder and Trace Format Abstraction
+============================================
 
 The Trace Format Abstraction is a module that will be part of the shadow
 builder. This module is in charge of abstracting the underlying tracing tool
