@@ -1,7 +1,7 @@
-Shadow Builder and Trace Format Abstraction
+Shadow Builder and Trace Framework Abstraction
 ============================================
 
-The Trace Format Abstraction is a module that will be part of the shadow
+The Trace Framework Abstraction is a module that will be part of the shadow
 builder. This module is in charge of abstracting the underlying tracing tool
 used to benchmark.  The tool is still a stil a work in prrogress 
 (everything is perfectible). So over time new features and bugs resolving will
