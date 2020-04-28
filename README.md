@@ -3,7 +3,7 @@ Shadow Builder and Trace Framework Abstraction
 
 The Trace Framework Abstraction is a module that will be part of the shadow
 builder. This module is in charge of abstracting the underlying tracing tool
-used to benchmark.  The tool is still a stil a work in prrogress 
+used to benchmark.  The tool is still a stiLl a work in progress 
 (everything is perfectible). So over time new features and bugs resolving will
 be pushed.
 
@@ -18,7 +18,7 @@ be pushed.
 # Concepts
 
 There are some information to know before jumping into the shadow builder. The
-architecture section provides a glampse of the tool's guts. But before we some
+architecture section provides a glampse of the tool's guts. But before starting, we need some
 terminology to speak the same language.
 
 ## Terminology
@@ -101,7 +101,7 @@ sudo snap install cmake --classic # To get a more recent version of cmake.
 ```
 
 In order to build clang and LLVM, gcc 9 is needed. Under the official ppa, this
-is not possible to find it. Therefore we will need to install from a test ppa:
+is not possible to find it. Therefore, we will need to install from a test ppa:
 
 ``` shell
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test # Accept the key by pressing enter
@@ -110,8 +110,8 @@ sudo apt install gcc-9 g++-9 g++-9-multilib
 ```
 
 Then once this is done, as you might already have a gcc on your machine, the 
-update-alternative should be put in place to have different use of gcc. If the
-alternative for gcc is available on your machine you can direclty skip the
+update-alternative should be used to have different version of gcc. If the
+alternative for gcc is available and set up on your machine, you can direclty skip the
 command block below.
 
 ``` shell
