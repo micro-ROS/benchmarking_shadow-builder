@@ -23,7 +23,7 @@ TFAInfoPlugin& @@PlugName@@::getInfoPlugins()
 //	return *mInfos;
 }
 
-bool MyPlugin::initializePlugin()
+bool @@PlugName@@::initializePlugin()
 {
 #if 0
 	
