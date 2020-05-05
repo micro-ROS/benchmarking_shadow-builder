@@ -61,16 +61,15 @@ These answers provided us with the minimun necessary for  the creation of plugin
 ## Files tree structure
 
 The final code shall be located in the folder path
-src_root_sb/tfa-plugin/timebenchmarking with the following structure:
+src_root_sb/tfa-plugin/TimeBenchmarking with the following structure:
 
-timebenchmarking
-	├── CMakeLists.txt
-	├── inc
-	│   └── plugin_timebenchmarking
-	│       └── plugin_timebenchmarking.h
-	└── src
-	    └── plugin_timebenchmarking.cpp
-
+TimeBenchmarking \
+	├── CMakeLists.txt \
+	├── inc \
+	│   └──TimeBenchmarking \
+	│       └── TimeBenchmarking.h \
+	└── src \
+	    └── plugin_TimeBenchmarking.cpp \
 
 ## Register a new plugin into the TFA core of the shadow builder
 
@@ -112,7 +111,6 @@ TimeBenchmarking::~TimeBenchmarking()
 	if(mInfos) {
 		delete mInfos;
 	}
-
 }
 ```
 
@@ -181,7 +179,7 @@ const char difftime_func[] =
 	}\n\
 	#include <stdio.h>\n\
 	printf(\"Exe time: %%ld sec : %%ld ms : %%ld ns\\n\",\n\
-		       	result.tv_sec, result.tv_nsec / 1000000, result.tv_nsec
+		       	result.tv_sec, result.tv_nsec / 1000000, result.tv_nsec \
 %% 1000000);\n\
 }\n" ;
 
@@ -481,10 +479,10 @@ It shall look like the following:
 
 ```cmake
 cmake_minimum_required(VERSION 3.13)  # CMake version check
-project(plugin_timebenchmarking VERSION 0.1 DESCRIPTION "MY Plugin")
+project(TimeBenchmarking VERSION 0.1 DESCRIPTION "MY Plugin")
 set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
 
-set(PLUGIN_NAME "plugin_timebenchmarking")
+set(PLUGIN_NAME "TimeBenchmarking")
 
 # Needed to get the function to do tests 
 include(../../CMakeMacros/CMakeTesting.txt)
@@ -494,7 +492,7 @@ include_directories(inc/)
 
 # Plugins source files
 list(APPEND TEST_PLUGIN_SRC
-        src/plugin_timebenchmarking.cpp
+        src/TimeBenchmarking.cpp
 )
 
 # Needed to create a shareable library
@@ -518,7 +516,7 @@ add_subdirectory(plugin_test)
 add_subdirectory(myplugin)
 
 # Add your project configuration here:
-add_subdirectory(plugin_timebenchmarking)
+add_subdirectory(TimeBenchmarking)
 ```
 
 ### Compilation
