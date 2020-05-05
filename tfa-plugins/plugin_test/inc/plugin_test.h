@@ -13,7 +13,6 @@ public:
 	
 	Status runnableComments(const TFACommentInfo& cleanComment,
 				std::string& replacement);
-private:
 };
 
 class TFACMMonitorVar: public ITFACommentListener
@@ -34,7 +33,6 @@ public:
 
 	TFAInfoPlugin& getInfoPlugins();
 	bool initializePlugin();
-private:
 };
 
 extern "C" IPlugin* create() {
