@@ -2,7 +2,6 @@
 
 #include <tfa/IPlugin.h> 
 #include <tfa/ITFACommentListener.h>
-#include <string>
 
 class @@PlugName@@: public IPlugin {
 public:
