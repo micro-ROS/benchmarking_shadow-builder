@@ -3,7 +3,7 @@
  */
 
 #include <tfa/IPlugin.h>
-#include <inc/@@PlugName@@.h>
+#include <@@PlugName@@/@@PlugName@@.h>
 
 #include <vector>
 #include <iostream>
