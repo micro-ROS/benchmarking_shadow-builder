@@ -42,30 +42,34 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 		return Status::returnStatusError();
 	}
 
-	if (params[0] == "declare" && params.size() == 1) {
-		replacement = "#include <time.h>\n";
-		replacement += "#include <stdio.h>\n";
-		return Status::returnStatusOkay();
-	} else if (params[0]  == "start" && params.size() == 2) {
-		std::string start = "timer_start_" + params[1]; 
-		std::string stop = "timer_stop_" + params[1]; 
+	if (params.size() == 1) {
+		if (params[0] == "declare" ) {
+			replacement = "#include <time.h>\n";
+			replacement += "#include <stdio.h>\n";
+			return Status::returnStatusOkay();
+		}
+	} else if (param.size() == 2) {
+		if (params[0]  == "start") == 2) {
+			std::string start = "timer_start_" + params[1]; 
+			std::string stop = "timer_stop_" + params[1]; 
 
-		replacement = "struct timespec " + start + ", " + stop + ";\n";
-		replacement += "\tclock_gettime(CLOCK_PROCESS_CPUTIME_ID, \
-				&timer_start_" + params[1] + ");\n"; 
-		return Status::returnStatusOkay();
-	} else if (params[0]  == "stop" && params.size() == 2) {
-		std::string start = "timer_start_" + params[1]; 
-		std::string stop = "timer_stop_" + params[1]; 
-		char buf[sizeof(difftime_func) + start.length() +
-			stop.length()];
+			replacement = "struct timespec " + start + ", " + stop + ";\n";
+			replacement += "\tclock_gettime(CLOCK_PROCESS_CPUTIME_ID, \
+					&timer_start_" + params[1] + ");\n"; 
+					return Status::returnStatusOkay();
+		} else if (params[0]  == "stop") == 2) {
+			std::string start = "timer_start_" + params[1]; 
+			std::string stop = "timer_stop_" + params[1]; 
+			char buf[sizeof(difftime_func) + start.length() +
+				stop.length()];
 
-		sprintf(buf, difftime_func, start.c_str(), stop.c_str());
-		replacement += "clock_gettime(CLOCK_PROCESS_CPUTIME_ID, \
+			sprintf(buf, difftime_func, start.c_str(), stop.c_str());
+			replacement += "clock_gettime(CLOCK_PROCESS_CPUTIME_ID, \
 					&timer_stop_" + params[1] + ");\n";
-		replacement += string(buf);
-		
-		return Status::returnStatusOkay();
+			replacement += string(buf);
+
+			return Status::returnStatusOkay();
+		}
 	}
 
 	return Status::returnStatusError();
