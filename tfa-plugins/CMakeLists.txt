@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14) # Enable c++14 standard
 # Add your project configuration here.
 add_subdirectory(plugin_test)
 add_subdirectory(myplugin)
-#add_subdirectory(TimeBenchmarking)
+add_subdirectory(TimeBenchmarking)

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <tfa/IPlugin.h> 
-#include <tfa/ITFACommentListener.h>
 
 class @@PlugName@@: public IPlugin {
 public:
