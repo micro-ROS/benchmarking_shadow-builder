@@ -287,3 +287,11 @@ to compile it.
 
 One error arise with low RAM. Currently the only way to solve  would be to increase
 the swap size as explained here [https://askubuntu.com/questions/927854/how-do-i-increase-the-size-of-swapfile-without-removing-it-in-the-terminal](https://askubuntu.com/questions/927854/how-do-i-increase-the-size-of-swapfile-without-removing-it-in-the-terminal)
+
+# LICENSE
+
+Shadow Builder tool suite (which include the TFA and Shadow-Builder) are to be open-sourced under the Apache-2.0 license. See the
+[LICENSE](./LICENSE) file for details.
+
+For a list of other open-source components included in Shadow Builder tool suite (which include the TFA and Shadow-Builder), see
+the file [3rd-party-licenses.md](./3rd-party-licenses.md).
