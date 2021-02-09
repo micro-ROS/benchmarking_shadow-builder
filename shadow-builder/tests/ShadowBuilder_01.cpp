@@ -1,9 +1,15 @@
 #include <shadow-builder/ShadowBuilder.h>
 #include <iostream>
 
+#define SRC_ROOT "/home/osb/workspace/benchmark/benchmarking_shadow-builder/"
+#define CONCAT(a, b, c) (a b c)
+
 #define ARGV_0 (char*) "ShadowBuilder"
-#define ARGV_1 (char*) "--cfg-shadowbuilder=/home/amalki/prjs/microROS/soft/apps/pipeline-benchmarking/res/sb-res/bcf_uros.xml"
-#define ARGV_2 (char*) "--cfg-tfa=/home/amalki/prjs/microROS/soft/apps/pipeline-benchmarking/res/tfa-res/tfa.xml"
+// #define ARGV_1 (char*) "--cfg-shadowbuilder=/home/amalki/prjs/microROS/soft/apps/pipeline-benchmarking/res/sb-res/bcf_uros.xml"
+// #define ARGV_2 (char*) "--cfg-tfa=/home/amalki/prjs/microROS/soft/apps/pipeline-benchmarking/res/tfa-res/tfa.xml"
+#define ARGV_1 (char*) CONCAT("--cfg-shadowbuilder=", SRC_ROOT, "res/sb-res/bcf.xml")
+#define ARGV_2 (char*) CONCAT("--cfg-tfa=", SRC_ROOT, "res/tfa-res/tfa.xml")
+
 
 char *argv_[] = {ARGV_0, ARGV_1, ARGV_2};
 

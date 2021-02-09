@@ -4,7 +4,7 @@
 
 int main (int argc, char **argv)
 {
-	PluginLoader myPlugin("tfa-plugins/plugin_test/libplugin_test/");
+	PluginLoader myPlugin("tfa-plugins/plugin_test/libplugin_test.so");
 	IPlugin *plugin;
 
 	if (false == myPlugin.getPlugin(&plugin)) {

@@ -196,7 +196,7 @@ Status TreeFS::m_searchSubFiles(const std::string& path, const  bool isRecursive
 
 #if DEBUG
 	//TODO log file
-	std::cout << "Current path in to look into: " << path << std::endl;
+	std::cout << "Current path to look into: " << path << std::endl;
 #endif
 
 	if (!dir) {
@@ -212,7 +212,7 @@ Status TreeFS::m_searchSubFiles(const std::string& path, const  bool isRecursive
 
 #if DEBUG
 		//TODO log file
-		std::cout << "Found new path" << newPath << std::endl;
+		std::cout << "Found new path: " << newPath << std::endl;
 #endif
 		FSElement *el = nullptr;
 

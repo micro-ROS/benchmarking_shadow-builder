@@ -5,7 +5,8 @@ BASEDIR=$(dirname $0)
 ABSPATH=$(readlink -f $0)
 ABSDIR=$(dirname $ABSPATH)
 PATH_TEMP=${ABSDIR}/template_plugin
-. ${ABSDIR}/../path.sh
+# . ${ABSDIR}/../path.sh
+PATH_SOURCE=$(readlink -f ${ABSDIR}/../../..)
 
 if [ $# -ne 1 ]; then
 	print "Please provide the name of the plugin you want to create"

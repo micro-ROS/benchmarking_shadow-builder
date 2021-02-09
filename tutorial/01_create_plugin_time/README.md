@@ -1,8 +1,8 @@
 ## Creation of a plugin
 
-This section is dealing with one specific benchmarking tooling called the
+This section deals with one specific benchmarking tool called the
 Shadow Builder. More specifically, this tutorial aims to create a plugin from
-A to Z and how to instrument your code.
+A to Z and explain how to instrument your code.
 
 For the sake of ease of understanding, this tutorial is proposing to
 benchmark the time spent on a simple looping function.
@@ -12,9 +12,9 @@ benchmark the time spent on a simple looping function.
 Before getting to the heart of the matter, it is needed to meet the following
 requirements:
 
- 1. It is assumed that the the **shadow builder** and **trace framework abstraction**
-terminology and mechanisms are a known. If this is not the case, the
-documentation related to the benchmarking is available in
+ 1. It is assumed that the **shadow builder** and **trace framework abstraction**
+terminology and mechanisms are known. If this is not the case, the
+documentation related to the benchmarking is available
 [here](https://github.com/micro-ROS/benchmarking_shadow-builder/blob/master/README.md).
 
  2. Using linux, preferably Linux Ubuntu 18.04 and above, all debian based
@@ -23,45 +23,45 @@ documentation related to the benchmarking is available in
  3. Some knowledge about c and c++ programing
 
 
-Once all the checkboxes ticked the tutorial can begin.
+Once all the checkboxes are ticked, the tutorial can begin.
 
 ## TFA - Plugin
 
-In order to create a plugin, the information that is crucial to figure out are:
+In order to create a plugin, the information that is crucial to figure out is as follows:
 
-What is to benchmark? --> The time spent in a a function.
-How to do so ? --> Is there a plugin already supporting it? Yes, then to do. And
-the code to profil can be instrumented.
+What is to be benchmarked? --> The time spent in a function.
+How to do it? --> Is there a plugin already supporting it? If yes, then go ahead and
+the code to the profile can be instrumented.
 
 If no plugin supports it, then a plugin has to be created.
-Then another set of question arise which are (according to the context):
+Then, another set of questions arises, which depend on the context:
 
- 1. How could it benifit to many others? 
+ 1. How could it benifit the others? 
  2. What piece of code would be used to measure the time? (in C or C++).
- 3. What plaform can it support? (OS,CPU etc...).
+ 3. What platform it can support? (OS, CPU, etc...).
  4. How the code shall be instrumented?
 
 
-The answers to this question would be:
+The answers to these questions would be:
 
- 1. Create a generic plugin and write a documentation that would be
-    understandable for a normal user and an expert user.
- 2. Using the timespec ang clock_gettime Linux syscall.
- 3. From previous answer --> OS: Linux any cpu as long as it has the same Linux api.
- 4. Using a simple way using the comment as follow 
-    /** Benchmarking::plugin_name::function */ . The choice for the current
-    tutorial would be /** Benchmarking::TimeBenchmarking::Timer */
+ 1. Create a generic plugin and write a documentation, that would be
+    understandable both to a normal and an expert user.
+ 2. Use the _timespec_ and _clock_gettime_ Linux syscall.
+ 3. From previous answer --> OS: Linux and CPU as long as it has the same Linux api.
+ 4. Use a simple way applying the comment as follows: 
+    _/** Benchmarking::plugin_name::function */_ . `The choice for the current
+    tutorial would be:` _/** Benchmarking::TimeBenchmarking::Timer */_
 
  
 
-These answers provided us with the minimun necessary for  the creation of plugin.
+These answers provide us with the minimum necessary details for the plugin creation.
 
 # Create a tfa - plugin
 
 ## Files tree structure
 
 The final code shall be located in the folder path
-src_root_sb/tfa-plugin/TimeBenchmarking with the following structure:
+`src_root_sb/tfa-plugin/TimeBenchmarking` with the following structure:
 
 TimeBenchmarking \
 	├── CMakeLists.txt \
@@ -73,15 +73,15 @@ TimeBenchmarking \
 
 ## Register a new plugin into the TFA core of the shadow builder
 
-The shadow-builder is relying on tfa's plugins to be executed to answer the
-parser dispatch. Therefore the need of some interoperability is needed.
+The shadow-builder is relying on TFA's plugins execution to answer the
+parser dispatchment. Therefore, the need for some interoperability exists.
 
-Every new plugins are written by implementing the IPlugin interface as shown in
-the file src_root/tfa_core/inc/tfa/IPlugin.h. All what the interface needs to do is to
-implement the pure virtual function. A simple example would be as in the
-plugin_test:
+Every new plugin is written by implementing the IPlugin interface as shown in
+the file `src_root/tfa_core/inc/tfa/IPlugin.h`. All the interface needs to do, is to
+implement the pure virtual functions. A simple example would be as in the
+_plugin_test_.
 
-in the plugin header:
+In the plugin header:
 
 ``` cpp
 class TimeBenchmarking: public IPlugin {
@@ -101,7 +101,7 @@ extern "C" void destroy(IPlugin* p) {
 	delete p;
 }
 ``` 
-in the plugin source code:
+In the plugin source code:
 
 ``` cpp
 TimeBenchmarking::TimeBenchmarking() {}
@@ -112,11 +112,7 @@ TimeBenchmarking::~TimeBenchmarking()
 		delete mInfos;
 	}
 }
-```
 
-And set the 
-
-```cpp
 TFAInfoPlugin& TimeBenchmarking::getInfoPlugins()
 {
 	return *mInfo;
@@ -139,14 +135,14 @@ bool TimeBenchmarking::initializePlugin()
 ## Create a listener
 
 Good! Now the plugin is ready to be registered within the TFA's core. So when a
-session is running, the plugin will be found. However nothing will really
-happen. Indeed your plugin is not listening to a specific tag.
+session is running, the plugin will be found. However, nothing will really
+happen. Indeed, your plugin is not listening to a specific tag yet.
 
 Just as a reminder, the listener is an object derivated from the interface
-**ITFACommentListener**.  It is listening to as specific _Tag_ which will be
-replace by a piece of code.
+**ITFACommentListener**.  It is listening to a specific _Tag_, which will be
+replaced by a piece of code.
 
-The declaration of the object shall be as display below:
+The declaration of the object shall be as below:
 ``` cpp
 class Timer: public ITFACommentListener
 {
@@ -158,9 +154,9 @@ private:
 };
 ```
 
-As shown above, the class is inheriting from the ITFACommentListenner classe. 
-the ITFACommentListener as one pure virtual method called runnableComments.
-This means your plugin has to implement the method runnableComments(...).
+As shown above, the class **Timer** inherits from the **ITFACommentListenner** class, 
+which has one pure virtual method called _runnableComments_.
+This means your plugin has to implement the method _runnableComments(...)_.
 
 
 ``` cpp
@@ -196,26 +192,26 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 }
 ```
 
-Now the functions are correclty implemented. The timer needs several things to
+Now the functions are correctly implemented. The timer needs several things to
 measure the time spent in a function:
 
- 1. Start the timer before the function, get an intial timestamp
+ 1. Start the timer before the function, get an intial timestamp..
  2. Stop the timer after the function has returned, get another timestamp
- 3. Measure the delta between the two timestamp measured above.
- 4. Print the delta in a human readable.
+ 3. Calculate the delta between the two timestamps measured above.
+ 4. Print the delta in a human readable way.
 
 This basically means that the plugin will neeed a way to get the timestamps, as
-discussed before, by using the clock_gettime, and print it to the user by using
-printf.
+discussed before, by using the _clock_gettime_, and print it to the user by using
+_printf_.
 
-A tag can be provided by several parameters. This will be usefull for the sack of
+A tag can provide several parameters. This will be usefull for the sack of
 the timer:
 
- * A parameter to identify what's is the timer's status (i.e. start or stop)
- * A parameter to identify the timer itself in a unique way by the dev
- * A parameter that is needed for header declaration .
+ * A parameter to identify what the timer's status is (i.e. start or stop).
+ * A parameter to identify the timer itself in a unique way by the dev.
+ * A parameter that is needed for header declaration.
 
-This would look like that in real life without any tools: 
+Without any benchmark tools, this code would look like as follows: 
 
 ```c
 
@@ -251,7 +247,8 @@ void func2benchmark(...)
 }
 ```
 
-This would llok like this using the tfa:
+Using the TFA, the code would look like this:
+
 ```c
 /** Benchmarking::TimeBenchmarking::Timer(declare) */
 
@@ -263,20 +260,19 @@ void func2benchmark(...)
 }
 ```
 
-By taking a look at the differences, the amount of overhead code clarity
-introduce by the method is very low. 
+By taking a look at the differences between both codes, the amount of overhead code
+introduced by the benchmark method is very low. 
 
 Now, let's roll-up the sleeves and implement it as a plugin and therefore in a
 generic way to be reusable.
 
 ### Declare
 
-In order to declare the include needed to benchmark. The way to do it would be
-to get the parameter 0 to be a string that matches "declare". The replacement
-will be "#include \<time.h\>\n#include \<stdio.h\>\n" 
+Header files need to be declared in the benchmark code. In order to do this, the parameter 0 must equal "declare". The replacement
+will be `"#include \<time.h\>\n#include \<stdio.h\>\n"` 
 
 It is needed to append "\n" to the end of a line, as this piece of code is going
-to be appended to the code. 
+to be appended to the another code. 
 
 ```cpp
 
@@ -295,13 +291,13 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 }
 ```
 
-It is mandatory to return Status::returnStatusOkay() to tell the tfa-core that
+It is mandatory to return _Status::returnStatusOkay()_ to tell the _tfa-core_ that
 the _Tag_ was handled and therefore no other plugins will be using it.
 
 #### Start 
 
 The starting element will basically record a timestamp in the memory. How to do
-so in C programming on a Linux system would be as follow:
+so in C programming on a Linux system would be as follows:
 
 ```cpp
 Status Timer::runnableComments(const TFACommentInfo& cleanComment,
@@ -324,14 +320,14 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 }
 ```
 
-It is mandatory to return Status::returnStatusOkay() to tell the tfa-core that
+It is mandatory to return _Status::returnStatusOkay()_ to tell the _tfa-core_ that
 the _Tag_ was handled and therefore no other plugins will be using it.
 
 #### Stop
 
 Then the stopping element, which will be in charge of getting a timestamp,
-make the delta time spent between the stop and the start and finally print in a
-human-readable way.
+calculates the delta time spent between the stop and the start and finally prints it in a
+human readable way.
 
 ```cpp
 
@@ -374,16 +370,15 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 }
 ```
 
-It is mandatory to return Status::returnStatusOkay() to tell the tfa-core that
+It is mandatory to return _Status::returnStatusOkay()_ to tell the _tfa-core_ that
 the _Tag_ was handled and therefore no other plugins will be using it.
 
-Additionally, this is necessary to think that the replacement code is actual
-C code that is going to be compiled. Therefore, one should be careful about the
-the way to format it and be careful of the escaping charactere.
+Additionally, it is necessary to consider that the replacement code, which is going to be compiled, is actually
+C code. Therefore, one should be careful about the way of formatting it and using the escape characters.
 
 #### Combine everything together
 
-Finally the whole runnableComment method will be look like that:
+Finally the whole _runnableComment_ method will be look like that:
 
 ```cpp
 Status Timer::runnableComments(const TFACommentInfo& cleanComment,
@@ -445,7 +440,7 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 
 ## Register the listener
 
-Once the listener is implemented, then it needs to to be registerd within the
+Once the listener is implemented, then it needs to be registerd within the
 plugin:
 
 ```cpp
@@ -467,14 +462,13 @@ bool TimeBenchmarking::initializePlugin()
 }
 ```
 
-A protected vector,from the IPlugin, class needs to be appended for each listener this plugin will be
-supporting and implement.
+The protected vector _iclVect_ from the **IPlugin** class needs to be appended with each listener, which will be
+supported and implemented in the plugin.
 
 
 ## Compilation files
 
-The compilation file will be the CMakeLists.txt at the root of the plugin
-
+The compilation file will be the _CMakeLists.txt_ located in the root  folder of the plugin.
 It shall look like the following:
 
 ```cmake
@@ -505,7 +499,7 @@ target_link_libraries(tfa)
 set_target_properties(${PLUGIN_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})
 ```
 
-And finally, it is needed to add into the parent folder's CMakelists the
+And finally, it is needed to add into the parent folder's _CMakeLists.txt_ the
 subdirectory of the plugin:
 
 ```cmake
@@ -520,40 +514,40 @@ add_subdirectory(TimeBenchmarking)
 ```
 
 ### Compilation
-To compile the plugin. From the build folder created before in the
-shadow-builder.
+To compile the plugin, run the following commands from the build folder created before in the _shadow-builder_ root folder:
 
+```shell
+cd src_root/build/ 
+cmake ..
+make -j4
+```
 ## Configuration
 
 ### TFA configuration
 
-An example fo the configuration file is in the source tree at
-src_root/res/tfa-res/tfa.xml
+An example of the configuration file is in the source tree at `src_root/res/tfa-res/tfa.xml`.
 
-This file only keeps track of the path where to look for plugins. Watch out! this
-file is a template and renewed at each compilation. 
+This file only keeps a track of the path where to look for plugins. Watch out! This
+file is a template and it is renewed at each compilation. 
 
 In the current context, the path is the default one.
 
 
 ### The shadow builder configuration
 
-The shdow-buidler configuration is providing some hints where the source files
+The shadow-builder configuration provides some hints where the source files
 to benchmark can be found and where the ouput folder should be set.
 
 A detailed explaination can be found
 [here](https://github.com/micro-ROS/benchmarking_shadow-builder/blob/master/res/README.md#shadow-builder-configuration).
 
 ## Running the shadow-builder
-Once all the step done above and plugin compiled the command to type woud be:
+Once all the steps above are done and the plugin is compiled, the command to run the code’s instrumentation would be:
 
 ```shell
 cd src_root/build/ 
-make
 ./shadow-program -s ../res/sb-res/bcf.xml -t ../res/tfa-res/tfa.xml
 ```
 
-The output should be put in the folder configured in the bcf configuration file
-(by default should /tmp/output/) under the folder then session's name (test by
-default) appended by the date and time when the benchmarking was started.
+The output, configured in the **bcf.xml** configuration file, should be by default put into the folder **/tmp/output/** under the session's name **test**  appended by the date and time when the benchmarking was started.
 

@@ -11,7 +11,7 @@ int main(void)
 	std::vector<File *> infos;
 	FSElementFilterExt *filterEl = new FSElementFilterExt("cpp", false);
 	files.addFilter(static_cast<FSElementFilter *>(filterEl));
-	cout << "opening folder" << endl;
+	cout << "Opening folder" << endl;
 	files += "/tmp/mytest/";
 
 	infos = files.getSourceFiles();

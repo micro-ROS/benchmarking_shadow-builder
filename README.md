@@ -1,10 +1,10 @@
 Shadow Builder and Trace Framework Abstraction
 ============================================
 
-The Trace Framework Abstraction is a module that will be part of the shadow
+The Trace Framework Abstraction is a module that will be a part of the shadow
 builder. This module is in charge of abstracting the underlying tracing tool
-used to benchmark.  The tool is still a stiLl a work in progress 
-(everything is perfectible). So over time new features and bugs resolving will
+used to benchmark. The tool is still a work in progress 
+(everything can always be improved). So over the time new features and bug fixes will
 be pushed.
 
 # Table of Contents
@@ -17,66 +17,65 @@ be pushed.
 
 # Concepts
 
-There are some information to know before jumping into the shadow builder. The
-architecture section provides a glampse of the tool's guts. But before starting, we need some
+There is some information to get to know before jumping into the shadow builder. The
+architecture section provides a glampse of the tool's guts. But, before we start, we need some
 terminology to speak the same language.
 
 ## Terminology
 
 ### Tags
- A tag is a comment that is use by the shadow-builder. A comment formatted
-as follow:
+ A tag is a comment that is used by the shadow-builder. A comment is formatted
+as follows:
 
- * /\*\* Benchmarking::ModuleGroup::Function \*/ : without any parameters,
- * /\*\* Benchmarking::ModuleGroup::Function(param0,...,paramN) \*/ : with
+ * _/\*\* Benchmarking::ModuleGroup::Function \*/_ : without any parameters,
+ * _/\*\* Benchmarking::ModuleGroup::Function(param0,...,paramN) \*/_: with
    paramaters
 
-is considered a _shadow-builder comment_ also known as a **Tag**.
+and is considered a `shadow-builder comment` also known as a **Tag**.
 
 ### TFA: Trace Framework Abstraction  
 
-This is a Framework provided to aid deloveloper to create various plugin.
+This is a framework provided to help deloveloper to create various plugins.
 
 ### Plugins
 
-Plugins are library files that are providing replacement for a **Tag**.
+Plugins are library files that provide replacement for a **Tag**.
 
 ### Parser
 
-The element (front-end) in charge of looking for comment within a string. If
-this string comment is **Tag** it's dispatched.
+This element (front-end) is in charge of looking for a comment within a string. If
+this string comment is a **Tag**, it is dispatched.
 
 # Architecture
 
 The Shadow-Builder is made of 4 core components that are:
 
- * **The parser element**: Which is just a backend tool that indicates the TFA
+ * **The parser element**: This is just a backend tool, which indicates the TFA
    module that a **Tag** was found in the source code. It's also in charge of
-   writing some piece of code. Currently, the llvm and clang are used to parse
-   and adapt the code. The use of clang libtooling is documented more in details
+   writing some piece of code. Currently, the _llvm_ and _clang_ are used to parse and adapt the code. The use of _clang_ libtooling is documented more detailed
    on the official webpage: [https://releases.llvm.org/10.0.0/tools/clang/docs/index.html](https://releases.llvm.org/10.0.0/tools/clang/docs/index.html) .
 
- * **The TFA module**: This software is in charge of manipulating the different 
-   plugins and dispatch the **Tags** found by the the parser
-   element. It will perform a first filtering to make sure this comment is 
-   formated correctly. In addition it also sanitises the commentaries (also
-   called tags). The TFA module undersanding is quite straight forware but more details are provided
+ * **The TFA module**: This software is in charge of manipulating different 
+   plugins and dispatching the **Tags** found by the parser
+   element. It will perform the first filtering to make sure the comment is 
+   formatted correctly. In addition, it also sanitises the commentaries (also
+   called tags). The TFA module undersanding is quite straight forward, but more details are provided
    within the [tfa_core/README.md](tfa_core/README.md) .
 
- * **The TFA plugins**: These are element that answer to a TFA module dispatch
+ * **The TFA plugins**: These are the elements, that answer to a TFA module dispatch,
    when a commentary matches the commentaries. The plugins are basically a
-   shared library file that will be opened on startup. Some more details how to
-   use and write them here: [tfa-plugins/README.md](tfa-plugins/README.md) .
+   shared library file, that will be opened on startup. Some more details how to
+   use and write them may be found here: [tfa-plugins/README.md](tfa-plugins/README.md) .
 
  * **Shadow Builder**: The umbrella core module that is in charge of
-   orchestrating the modules aforementionned. More about it here 
+   orchestrating the modules aforementioned. More about it may be checked here: 
    [shadow-builder/README.md](shadow-builder/README.md) . 
 
 ## Tree
 
-Below the tree view of the important folders, files and their descriptions.
+The tree view of the important folders, files and their descriptions is shown below.
 
-shadow_builder\
+benchmarking_shadow-builder\
 	├── common  		--> Toolbox source files \
 	├── examples		--> Examples of instrumented code \
 	├── ext			--> External dl and libraries (do not pollute your machine and no need for docker) \
@@ -90,7 +89,7 @@ shadow_builder\
 
 ## Dependencies
 
-First of all, in order to start compiling the shadow-builder it is needed to
+First of all, in order to start compiling the shadow-builder, it is needed to
 retrieve a list of dependencies. 
 
 ### Under Ubuntu 18.04:
@@ -99,9 +98,14 @@ retrieve a list of dependencies.
 sudo apt install git libzmq3-dev binutils libssl-dev python3-distutils python3
 sudo snap install cmake --classic # To get a more recent version of cmake.
 ```
+Make sure the correct version of _cmake_ is being applied. 
 
-In order to build clang and LLVM, gcc 9 is needed. Under the official ppa, this
-is not possible to find it. Therefore, we will need to install from a test ppa:
+``` shell
+cmake --version
+```
+
+In order to build _clang_ and _LLVM_, gcc 9 is needed. Under the official ppa, this
+is not possible to find it. Therefore, we will need to install it from a test ppa:
 
 ``` shell
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test # Accept the key by pressing enter
@@ -109,9 +113,9 @@ sudo apt update
 sudo apt install gcc-9 g++-9 g++-9-multilib
 ```
 
-Then once this is done, as you might already have a gcc on your machine, the 
+Then, once this is done, as you might already have a gcc on your machine, the 
 update-alternative should be used to have different version of gcc. If the
-alternative for gcc is available and set up on your machine, you can direclty skip the
+alternative for gcc is available and set up on your machine, you can directly skip the
 command block below.
 
 ``` shell
@@ -136,7 +140,7 @@ sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 30
 sudo update-alternatives --set c++ /usr/bin/g++
 ``` 
 
-Then select the gcc9 and g++9 as following:
+Then, select the gcc9 and g++9 as follows:
 
 ``` shell
 sudo update-alternatives --config gcc
@@ -151,14 +155,14 @@ There are 2 choices for the alternative gcc (providing /usr/bin/gcc).
 Press <enter> to keep the current choice[*], or type selection number: 2
 ```
 
-And repeat those steps for:
+And repeat these steps for:
  * c++ --> selecting /usr/bin/g++
  * cc --> selecting /usr/bin/gcc
  * gcc --> selecting /usr/bin/gcc-9
  * g++ --> selecting /usr/bin/g++-9
 
 
-It is possible to check if the right version of gcc and g++ in the command line:
+It is possible to check the right version of gcc and g++ in the command line:
 
 ``` shell
 gcc -v
@@ -168,25 +172,25 @@ c++ -v
 ```
 
 
-If some depencies were to be missing, please feel free to add them into this
+If some dependencies result to be missed, please feel free to add them into this
 document and then initiate a pull request.
 
 ## Compilation 
 
 Before starting, some internal dependencies must be retrieved. To do so, the
-script at the root of folder should be called as follow:
+script at the root folder should be called as follow:
 
 ``` shell
 ./prepare_build.sh # retrieves/compiles and installs dependencies
 ```
 
-Once this step is done, you can delete the ext/dl subdirectory. This will save you a lot
-of space
+Once this step is done, you can delete the `ext/dl` subdirectory. This will save you a lot
+of space.
 
-**This might take some time, go grab yourself a coffee**
+**This might take some time, so grab yourself a coffee.**
 
 
-Then once all dependencies are built, the shadow-builder is ready to be
+Then, once all dependencies are built, the _shadow-builder_ is ready to be
 compiled:
 
 ``` shell
@@ -197,18 +201,18 @@ make -j4
 
 ## First run: using the example/example_stupid_main
 
-To run the the shadow buidler against the examples (located ina examples/example_stupid_main),
-the following steps to perform are:
+To run the shadow builder against the examples (located in the examples/example_stupid_main),
+the following steps are to be performed:
 
 ```shell
 cd build # previously created during the compilation step.
-./shadow-program -s ../res/sb-res/bcf.xml -t ../res/tfa-res/tfa.xmlb
+./shadow-program -s ../res/sb-res/bcf.xml -t ../res/tfa-res/tfa.xml
 ```
 
 This command will create an instrumented code that will be generated in the
-folder /tmp/output/test_DATE. 
+folder `/tmp/output/test_DATE`. 
 
-Once in the folder, the following commands will compile and execute the code:
+The following commands will compile and execute the code:
 
 ``` shell
 cd /tmp/output/test_DATE/
@@ -217,7 +221,7 @@ cmake .. ; make
 ./simple_stupid_example 
 ```
 
-The output of this command should be:
+The output of the last command should be like this:
 
 ``` shell
 Monitor var i: 0
@@ -225,41 +229,40 @@ Monitor var i: 4294967295
 Exe time: 8 sec : 758 ms : 534352 ns
 ```
 
-To understand what is going, it is recommanded to go through all configurations
-file explaination and readmes, the examples code and its readme. 
+To understand what is going on, it is recommended to go through all configuration
+files' explainations and readmes, the codes' examples and their readmes. 
 
-For more details, refering to all readmes are a good start. The code is
-documentated as well and can provide additional information about what is going
-on at a very low level.
+It is good to start with all readmes to get more details. The code is
+documentated as well and can provide additional information at a very detailed level.
 
 ## Configuration files
 
-The shadow-builder is using XML configuration files to locate the TFA pluging folder 
-**currently only one folder can be provided**. By default the plugin folder will
-be located in the folder <src_root>/tfa-plugins/
+The shadow-builder uses XML configuration files to locate the TFA plugin folders,  
+**currently the only one folder that can be provided**. By default the plugin folder will
+be located in the folder `<src_root>/tfa-plugins/`.
 
-More information regarding the different attributes and node fo the XML
-configuraition can be find here: [res/README.md](res/README.md) .
+More information regarding the different attributes and nodes for the XML
+configuraition can be found here: [res/README.md](res/README.md) .
 
 ## Plugins
 
-Plugins are the "Responder" to _Tags_ that are found in the code. This _Tags_
-are used to tell the shadow-buidler and more specifically its plugins that a
-some benchmarking request are made in the code. 
+Plugins are the **Responders** to **Tags** that are found in the code. These **Tags**
+are used to tell the shadow-builder, and more specifically its plugins, that a
+benchmarking request is made in the code. 
 
-The response is up to the implementation in the plugin. For more details, please
+The response is up to the implementation of the plugin. For more details, please
 have a look here [tfa-plugins/README.md](tfa-plugins/README.md) .
 
 
 ## Unit tests
 
-Unit tests are available in the folder <module>/tests/xxx_\<xx\>.cpp
-Each test shall be added in the CMakeFile.txt in the module you are testing.
+Unit tests are available in the module subfolders `tests`.
+Each test cpp file shall be added to the `CMakeFile.txt` in the module you are testing.
 
-In addition the option -DENABLE_TESTS=ON shall be passed to the cmake to
+In addition, the option -DENABLE_TESTS=ON shall be passed to the cmake to
 activate tests creation.
 
-Curently a few are test are performed. In the future, more unit test will
+Currently a few tests are performed. In the future, more unit tests will
 be added.
 
 # Tested Platforms
@@ -275,23 +278,23 @@ configuration:
 
 ## Not enough Disk space
 
-Compilations of LLVM and clang are producing a lot of object files et so on.
-During the preparation, it is needed around 36GB of disk space.
+Compilations of _LLVM_ and _clang_ produce a lot of object files.
+During their preparation it is needed around 36GB of disk space.
 
 ## Not enough RAM during LLVM/clang compilation
 
-This error might occur during the execution of the script prepare_build.sh
+This error might occur during the execution of the script _prepare_build.sh_.
 
-Unfortunately the LLVM/clang compilation is quite greedy when it comes to resources needed
+Unfortunately, the _LLVM/clang_ compilation is quite greedy when it comes to resources needed
 to compile it.
 
-One error arise with low RAM. Currently the only way to solve  would be to increase
+This error arises due to a low RAM. Currently, the only way to solve it, would be to increase
 the swap size as explained here [https://askubuntu.com/questions/927854/how-do-i-increase-the-size-of-swapfile-without-removing-it-in-the-terminal](https://askubuntu.com/questions/927854/how-do-i-increase-the-size-of-swapfile-without-removing-it-in-the-terminal)
 
 # LICENSE
 
-Shadow Builder tool suite (which include the TFA and Shadow-Builder) are to be open-sourced under the Apache-2.0 license. See the
+The Shadow Builder tool suite (which includes the TFA and Shadow-Builder) is to be open-sourced under the Apache-2.0 license. See the
 [LICENSE](./LICENSE) file for details.
 
-For a list of other open-source components included in Shadow Builder tool suite (which include the TFA and Shadow-Builder), see
+For a list of other open-source components included in the Shadow Builder tool suite (which includes the TFA and Shadow-Builder), see
 the file [3rd-party-licenses.md](./3rd-party-licenses.md).

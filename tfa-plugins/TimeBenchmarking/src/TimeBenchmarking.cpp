@@ -48,8 +48,8 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 			replacement += "#include <stdio.h>\n";
 			return Status::returnStatusOkay();
 		}
-	} else if (param.size() == 2) {
-		if (params[0]  == "start") == 2) {
+	} else if (params.size() == 2) {
+		if (params[0]  == "start") {
 			std::string start = "timer_start_" + params[1]; 
 			std::string stop = "timer_stop_" + params[1]; 
 
@@ -57,7 +57,7 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 			replacement += "\tclock_gettime(CLOCK_PROCESS_CPUTIME_ID, \
 					&timer_start_" + params[1] + ");\n"; 
 					return Status::returnStatusOkay();
-		} else if (params[0]  == "stop") == 2) {
+		} else if (params[0]  == "stop") {
 			std::string start = "timer_start_" + params[1]; 
 			std::string stop = "timer_stop_" + params[1]; 
 			char buf[sizeof(difftime_func) + start.length() +
