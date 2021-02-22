@@ -13,26 +13,9 @@ add_definitions(
 -D__STDC_CONSTANT_MACROS
 )
 set_source_files_properties(src/ClangParser.cpp PROPERTIES COMPILE_FLAGS -fno-rtti)
-set(PATH_TO_LLVM "/home/amalki/prjs/microROS/soft/apps/pipeline-benchmarking/ext/")
-set (SEARCH_PATHS
-  ${PATH_TO_LLVM}
-  ${PATH_TO_LLVM}/lib/cmake
-  ${PATH_TO_LLVM}/lib/cmake/llvm
-  ${PATH_TO_LLVM}/lib/cmake/clang
-  ${PATH_TO_LLVM}/share/clang/cmake/
-  ${PATH_TO_LLVM}/share/llvm/cmake/
-)
 
-set(CLANGEXE_PATH \"${PATH_TO_LLVM}/bin/clang\")
-
-add_definitions(-DCLANGEXE_PATH=${CLANGEXE_PATH})
-find_package(LLVM REQUIRED CONFIG
-             PATHS ${SEARCH_PATHS}
-             NO_DEFAULT_PATH)
-
-find_package(Clang REQUIRED CONFIG
-             PATHS ${SEARCH_PATHS}
-             NO_DEFAULT_PATH)
+find_package(LLVM REQUIRED CONFIG)
+find_package(Clang REQUIRED CONFIG)
 
 include_directories(${LLVM_INCLUDE_DIRS})
 add_library(shadow-builder SHARED ${LIBSB_SRC})

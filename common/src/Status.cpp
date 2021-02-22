@@ -13,10 +13,9 @@ const Status Status::returnStatusOkay()
 	return Status();
 }
 
-const Status Status::returnStatusError(const string& str)
+const Status Status::returnStatusError(const string& str, ErrorCodes errorCode)
 {
-	Status st;
-	st = str;
+	Status st(str, errorCode);
 	return st;
 }
 
@@ -55,13 +54,6 @@ bool Status::operator==(const ErrorCodes errorCode)
 Status& Status::operator=(ErrorCodes errorCode)
 {
 	m_errorCode = errorCode;
-	return *this;
-}
-
-Status& Status::operator=(string& errorMsg)
-{
-	m_errorMsg = errorMsg;
-
 	return *this;
 }
 

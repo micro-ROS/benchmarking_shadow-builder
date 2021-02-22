@@ -20,7 +20,9 @@ list(APPEND TEST_PLUGIN_SRC
 add_library(${PLUGIN_NAME} SHARED ${TEST_PLUGIN_SRC})
 
 # Target library that we need to link against
-target_link_libraries(tfa)
+if (${ENABLE_TESTS}) 
+	target_link_libraries(${PLUGIN_NAME} common)
+endif()
 
 # Needed to create a version of the shared library
 set_target_properties(${PLUGIN_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})

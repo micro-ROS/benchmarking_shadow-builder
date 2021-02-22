@@ -21,7 +21,7 @@ public:
 	Status(const string& errorMsg = string("Success"), ErrorCodes errorCode = SUCCESS);
 
 	static const Status returnStatusOkay();
-	static const Status returnStatusError(const string& str = string("Error"));
+	static const Status returnStatusError(const string& str = string("Error"), ErrorCodes errorCode = ERROR);
 
 	void setErrorCode(const ErrorCodes errorCode);
 	void setErrorMsg(const string errorMsg);
@@ -34,7 +34,6 @@ public:
 	/** More for debug purposes */
 	bool operator==(const string& errorMsg);
 	Status& operator=(ErrorCodes errorCode);
-	Status& operator=(string& errorMsg);
 
 	operator bool() const { return (m_errorCode != SUCCESS); }
 private:

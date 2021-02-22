@@ -11,7 +11,7 @@ int main (int argc, char **argv)
 		return -1;
 	}
 
-	if (!plugin->initializePlugin()) {
+	if (plugin->initializePlugin()) {
 		std::cout << "Error while initializing pluging" <<
 			"tfa-plugins/plugin_test/libplugin_test" << std::endl;
 		return -1;
