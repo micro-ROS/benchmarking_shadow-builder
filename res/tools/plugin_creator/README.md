@@ -7,4 +7,4 @@ From the shadow builder root folder run the command
  <PluginName>
 ```
 
-to generate a plugin base project. The script will create the folder **src_root/tfa-plugin/PluginName**  as the starting point for its implementation.
+to generate the `<PluginName>` plugin base project. The script will create the folder `src_root/tfa-plugin/<PluginName>`  as the starting point for its implementation.

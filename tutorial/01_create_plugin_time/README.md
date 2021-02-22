@@ -1,18 +1,28 @@
-## Creation of a plugin
+Benchmarking with the Shadow-Builder
+=====================================
+
+ * [Benchmarking an applicastion with the TFA Shadow-Builder](#benchmarking-an-applicastion-with-the-tfa-shadow-builder)  
+ * [Prerequisites](#prerequisites)   
+ * [TFA Plugin](#tfa-plugin)  
+ * [Configuration](#configuration)  
+ * [Running the Shadow-Builder](#running-the-shadow-builder)  
+
+
+## Benchmarking an applicastion with the TFA Shadow-Builder
 
 This section deals with one specific benchmarking tool called the
-Shadow Builder. More specifically, this tutorial aims to create a plugin from
+Shadow-Builder. More specifically, this tutorial aims to create a plugin from
 A to Z and explain how to instrument your code.
 
 For the sake of ease of understanding, this tutorial is proposing to
 benchmark the time spent on a simple looping function.
 
-## Prerequisite
+## Prerequisites
 
 Before getting to the heart of the matter, it is needed to meet the following
 requirements:
 
- 1. It is assumed that the **shadow builder** and **trace framework abstraction**
+ 1. It is assumed that the **shadow-builder** and **trace framework abstraction**
 terminology and mechanisms are known. If this is not the case, the
 documentation related to the benchmarking is available
 [here](https://github.com/micro-ROS/benchmarking_shadow-builder/blob/master/README.md).
@@ -20,12 +30,12 @@ documentation related to the benchmarking is available
  2. Using linux, preferably Linux Ubuntu 18.04 and above, all debian based
     distros should do the job.
 
- 3. Some knowledge about c and c++ programing
+ 3. Some knowledge about c and c++ programing is a must.
 
 
 Once all the checkboxes are ticked, the tutorial can begin.
 
-## TFA - Plugin
+## TFA Plugin
 
 In order to create a plugin, the information that is crucial to figure out is as follows:
 
@@ -56,9 +66,9 @@ The answers to these questions would be:
 
 These answers provide us with the minimum necessary details for the plugin creation.
 
-# Create a tfa - plugin
+## Create a TFA-Plugin
 
-## Files tree structure
+### File tree structure
 
 The final code shall be located in the folder path
 `src_root_sb/tfa-plugin/TimeBenchmarking` with the following structure:
@@ -71,7 +81,7 @@ TimeBenchmarking \
 	└── src \
 	    └── plugin_TimeBenchmarking.cpp \
 
-## Register a new plugin into the TFA core of the shadow builder
+### Register a new plugin into the TFA core of the shadow-builder
 
 The shadow-builder is relying on TFA's plugins execution to answer the
 parser dispatchment. Therefore, the need for some interoperability exists.
@@ -132,7 +142,7 @@ bool TimeBenchmarking::initializePlugin()
 }
 ```
 
-## Create a listener
+### Create a listener
 
 Good! Now the plugin is ready to be registered within the TFA's core. So when a
 session is running, the plugin will be found. However, nothing will really
@@ -294,7 +304,7 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 It is mandatory to return _Status::returnStatusOkay()_ to tell the _tfa-core_ that
 the _Tag_ was handled and therefore no other plugins will be using it.
 
-#### Start 
+### Start 
 
 The starting element will basically record a timestamp in the memory. How to do
 so in C programming on a Linux system would be as follows:
@@ -323,7 +333,7 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 It is mandatory to return _Status::returnStatusOkay()_ to tell the _tfa-core_ that
 the _Tag_ was handled and therefore no other plugins will be using it.
 
-#### Stop
+### Stop
 
 Then the stopping element, which will be in charge of getting a timestamp,
 calculates the delta time spent between the stop and the start and finally prints it in a
@@ -376,7 +386,7 @@ the _Tag_ was handled and therefore no other plugins will be using it.
 Additionally, it is necessary to consider that the replacement code, which is going to be compiled, is actually
 C code. Therefore, one should be careful about the way of formatting it and using the escape characters.
 
-#### Combine everything together
+### Combine everything together
 
 Finally the whole _runnableComment_ method will be look like that:
 
@@ -438,7 +448,7 @@ Status Timer::runnableComments(const TFACommentInfo& cleanComment,
 }
 ```
 
-## Register the listener
+### Register the listener
 
 Once the listener is implemented, then it needs to be registerd within the
 plugin:
@@ -466,7 +476,7 @@ The protected vector _iclVect_ from the **IPlugin** class needs to be appended w
 supported and implemented in the plugin.
 
 
-## Compilation files
+### Compilation files
 
 The compilation file will be the _CMakeLists.txt_ located in the root  folder of the plugin.
 It shall look like the following:
@@ -514,6 +524,7 @@ add_subdirectory(TimeBenchmarking)
 ```
 
 ### Compilation
+
 To compile the plugin, run the following commands from the build folder created before in the _shadow-builder_ root folder:
 
 ```shell
@@ -541,7 +552,7 @@ to benchmark can be found and where the ouput folder should be set.
 A detailed explaination can be found
 [here](https://github.com/micro-ROS/benchmarking_shadow-builder/blob/master/res/README.md#shadow-builder-configuration).
 
-## Running the shadow-builder
+## Running the Shadow-Builder
 Once all the steps above are done and the plugin is compiled, the command to run the code’s instrumentation would be:
 
 ```shell

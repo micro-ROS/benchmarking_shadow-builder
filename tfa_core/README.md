@@ -41,7 +41,7 @@ In order to implement a plugin it is mandatory to implement two interface classe
 
 **ITFACommentListener**: This is a comment listener interface. The comment to listen to
 is a tag. The tag needs to follow the pattern as described in the main
-[README](../README.md###tags). From this class, the plugin must
+[README](../README.md###tags) file. From this class, the plugin must
 implement the below functions:
 
  * _virtual Status runnableComments(const TFACommentInfo& comment, std::string& replacement)_:

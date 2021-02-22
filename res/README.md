@@ -1,24 +1,22 @@
-Configuration file and Tools
+Configuration Files and Tools
 ============================
 
 
-This folder hold three subfolders:
- * sb-res: This folder is holding shadow-builder configurations xml files
- * tfa-res: This folder is holding TFA confguration files,
- * tools: holding tools to help.
+This folder holds three subfolders:
+ * _sb-res_  holds shadow-builder configurations files,
+ * _tfa-res_ holds TFA confguration files,
+ * _tools_ holds tools.
 
 
-# Configurations files
+# Configuration files
 
-The configuration files are XML formatted.  There are two type of configuration
-file:
- * Configuration file for the shadow-builder.
- * Configuration file for the TFA core.
+The configuration files are XML formatted. There are two types of configuration files:
+ * shadow-builder configuration file,
+ * TFA core configuration file.
 
 ## Shadow builder configuration
 
-The configuration file for the shadow builder. The default configuration file
-will be explained:
+The default configuration file for the shadow builder is shown below and it can be helpful in understanding the configuration rules. Its details are explained in the comments.
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -60,14 +58,13 @@ will be explained:
 </session>
 ```
 
-For more information, the list of XML nodes and attribute are defined in the
-header file src_root/shadow-builder/inc/shadow-builder/XMLConfiguration.h
+The list of valid XML nodes and attributes can be found in the
+header file `src_root/shadow-builder/inc/shadow-builder/XMLConfiguration.h`.
 
 
 ## TFA core configuration
 
-Like for the shadow builder, an example will be explain to understand how to
-configure the XML file:
+The default configuration file for the TFA core is shown below. Its details are explained in the comments.
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -81,6 +78,6 @@ configure the XML file:
 
 # Tools
 
-Tools are here to help development. The list below:
+Tools, which are provided to support developping plugins, are listed below:
 
- * plugin_creator.sh more details in its README [tools/plugin_creator/README.md](tools/plugin_creator/README.md).
+ * _plugin_creator.sh_ creates a new plugin project. More details can be found in the readme file [tools/plugin_creator/README.md](tools/plugin_creator/README.md).

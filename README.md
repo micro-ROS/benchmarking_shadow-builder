@@ -1,5 +1,5 @@
 Shadow Builder and Trace Framework Abstraction
-============================================
+==============================================
 
 The Trace Framework Abstraction is a module that will be a part of the shadow
 builder. This module is in charge of abstracting the underlying tracing tool
@@ -60,7 +60,7 @@ The Shadow-Builder is made of 4 core components that are:
    element. It will perform the first filtering to make sure the comment is 
    formatted correctly. In addition, it also sanitises the commentaries (also
    called tags). The TFA module undersanding is quite straight forward, but more details are provided
-   within the [tfa_core/README.md](tfa_core/README.md) .
+   within the readme file [tfa_core/README.md](tfa_core/README.md) .
 
  * **The TFA plugins**: These are the elements, that answer to a TFA module dispatch,
    when a commentary matches the commentaries. The plugins are basically a
