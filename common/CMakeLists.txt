@@ -30,6 +30,7 @@ list(APPEND COMMON_TEST_SRC
 	tests/client_server_01.cpp
 	tests/status_01.cpp
 	tests/files_01.cpp
+	tests/string_01.cpp
 )
 
 create_tests(common "${LIBCOMMON_SRC}" "${COMMON_TEST_SRC}")

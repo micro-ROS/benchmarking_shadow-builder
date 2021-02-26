@@ -139,7 +139,7 @@ Status TreeFS::searchFiles(std::vector<FSElementFilter *>& filter)
 		for (FSElementFilter* fse: filter) {
 			std::string file = m_fileElements.at(i)->getCurrentPath();
 
-			std::cout << "Checking filter" << fse->getFilterStr() << std::endl;
+			std::cout << "Checking filter '" << fse->getFilterStr() << "'"<< std::endl;
 			if (fse->filterProcess(file, hit)) {
 #ifdef DEBUG
 				std::cout << "Removing element [" <<

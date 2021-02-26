@@ -4,8 +4,9 @@
 #include <mutex>
 #include <thread>
 #include <vector>
-
 #include <unistd.h>
+
+#define SERVERS	3
 
 bool initComm ()
 {
@@ -17,7 +18,7 @@ void *client(unsigned int id, std::mutex& std_lock)
 	std::string mychannel("channel1");
 	unsigned int i = 0;
 
-	while (true) {
+	while (i < SERVERS) {
 		std::string mydata("[From threadid " + std::to_string(id) +
 			       	"] Hello you x");
 		MessageIPC msg(mydata, mychannel);
@@ -29,8 +30,12 @@ void *client(unsigned int id, std::mutex& std_lock)
 		std_lock.lock();
 		std::cout << "Success receiving response msg:" << msg.getData() << std::endl;
 		std_lock.unlock();
+		i++;
 	}
 
+		std_lock.lock();
+		std::cout << "Client id " << id << ": finished" << std::endl;
+		std_lock.unlock();
 
 		return NULL;
 }
@@ -51,7 +56,8 @@ void *serv(unsigned int id, std::mutex& std_lock)
 	}
 
 	std_lock.lock();
-	std::cout << "Success receiving msg:" << msg.getData() << std::endl;
+	std::cout << "Success receiving msg:" + msg.getData() 
+				+ "\nServer id " + std::to_string(id) + ": finished" << std::endl;
 	std_lock.unlock();
 
 	return NULL;
@@ -69,15 +75,14 @@ int main(int argc, char **argv)
 		std::cout << "ERROR Initializing" << std::endl;
 	}
 
+	std::cout << "Number of servers " << SERVERS << std::endl;
 
-	for (unsigned int i = 0; i < 10	; i++)
+	for (unsigned int i = 0; i < SERVERS	; i++)
 		server_v.push_back(std::move(std::thread(serv, i, std::ref(stdout_lock))));
                                        	
 	for (unsigned int i = 0; i < 1	; i++)
-		client_v.push_back(std::move(std::thread(client, i, std::ref(stdout_lock))));
-                                       	
+		client_v.push_back(std::move(std::thread(client, i, std::ref(stdout_lock))));                                    	
                                        
-                                       	
 	std::vector<std::thread> moved_client_v = std::move(client_v);
 	for (std::thread & th: moved_client_v) {
 		th.join();

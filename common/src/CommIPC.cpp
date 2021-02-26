@@ -154,7 +154,7 @@ std::shared_ptr<CommIPC>& CommIPCManager::mFindInstanceSendRecv(std::string& cha
 		std::cout << "Channel: " << channel << " not found" << std::endl;
 		return (mCreateChannels(channel)->at(CHANNEL_TX_INDEX));
 	} else {
-		std::cout << "Found Channel" << channel << std::endl;
+		std::cout << "Found Channel: " << channel << std::endl;
 	}
 
 	return (it->second->at(CHANNEL_TX_INDEX));

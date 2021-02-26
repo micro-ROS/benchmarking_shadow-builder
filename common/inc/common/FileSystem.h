@@ -281,7 +281,7 @@ private:
 class Files {
 public:
 	Files& operator-(const std::string& exclude);
-	Files& operator+(const std::string& exclude);
+	Files& operator+(const std::string& add);
 
 	Files& operator-=(const std::string& exlude);
 	Files& operator+=(const std::string& add);

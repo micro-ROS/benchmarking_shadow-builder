@@ -75,7 +75,7 @@ bool StringMan::split(const string& inStr,
 	}
 
 	do {
-		token = std::string(inStr.substr(prev_pos, pos));
+		token = std::string(inStr.substr(prev_pos, pos - prev_pos));
 		strings.push_back(token);
 		prev_pos = pos + 2;
 		pos = inStr.find(delim, prev_pos);
